@@ -1,3 +1,47 @@
 body {
+    font-size: 1em;
     text-align: center;
+    /**zoom out to fit all elements on the screen*/
+    zoom: 0.8;
+    -moz-transform: scale(0.7);
+    -moz-transform-origin: 50% 0;
+}
+
+
+/** Part 1: sidenav Win */
+.sidenav {
+	height: 100%;
+	position: fixed;
+	/**NOT ABSOLUTE: very important because of the main:Y-Scroll*/
+	transform: translate(0, -10000px);
+	transition: transform 0.2s ease;
+	z-index: +1;
+}
+
+.sidenav.open {
+	top: 0;
+	padding-top: 0;
+  width: 100%;
+	background: linear-gradient(to bottom right, gray 30%, white 100%);
+	color: white;
+	transform: translate(0, 0);
+	transition: transform 0.3s ease;
+	font-size: 2em;
+}
+
+.big-font-sidenav {
+	color: red;
+}
+
+.button-sidenav {
+	background-color: white;
+	color: black;
+	cursor: pointer;
+	border-radius: 20px;
+  font-size: 2em;
+}
+
+.button-sidenav:hover {
+	background-color: red;
+	color: blue;
 }

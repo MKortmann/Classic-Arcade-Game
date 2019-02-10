@@ -45,9 +45,19 @@ class Player {
 		this.x = x;
 		this.y = y;
 	}
+  win() {
+		clearTimeout(oTimer.elapsedTimer);
+    document.getElementById("id-sidenav-1").classList.toggle("open");
+  	this.reset();
+  }
 	/**If it reaches the water*/
 	update() {
-		this.y <= 30 ? this.reset() : " ";
+    if(this.y <= 30) {
+      this.win();
+    }
+   document.querySelectorAll(".span-moviments").forEach(function(val) {
+     val.textContent = moviments;
+   });
 	}
 	render() {
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -57,29 +67,42 @@ class Player {
 	reset() {
 		this.x = 303;
 		this.y = 630;
+		clearTimeout(oTimer.elapsedTimer);
+		oTimer.startTimer();
+		moviments = 0;
 	}
+
 	/**Check the keys! Keep the player in the canvas element!*/
 	handleInput(key) {
 		switch (key) {
 			case "up":
 				/*Recall that the player cannot move off screen*/
 				this.y >= 42 ? this.y = this.y - 84 : " ";
-				break;
+        moviments++;
+        this.update();
+        break;
 			case "down":
 				this.y <= 610 ? this.y = this.y + 84 : "";
-				break;
+        moviments++;
+        this.update();
+        break;
 			case "left":
 				this.x >= 50 ? this.x = this.x - 101 : "";
-				break;
+        moviments++;
+        this.update();
+        break;
 			case "right":
 				this.x <= 505 ? this.x = this.x + 101 : "";
-				break;
+        moviments++;
+        this.update();
+        break;
 		}
 	}
 }
 /**Create the amount number of enemies with different start location,
 different speed and at it directly to the allEnemies array.*/
 var allEnemies = [];
+let moviments = 0;
 
 function enemies(number = 5) {
 	for (let i = 1; i <= number; i++) {
@@ -90,9 +113,16 @@ function enemies(number = 5) {
 		enemy.y = yPosition;
 		allEnemies.push(enemy);
 	}
+
+	while(allEnemies.length > number) {
+		console.log(allEnemies.length);
+		console.log(number);
+		allEnemies.pop();
+	}
+
 }
 /**Five Enemies*/
-enemies(10);
+enemies(5);
 /**Creating the Player*/
 player = new Player();
 
@@ -116,4 +146,95 @@ document.addEventListener('keyup', function(e) {
 		40: 'down'
 	};
 	player.handleInput(allowedKeys[e.keyCode]);
+});
+
+/**Close the Win-Sidenav*/
+document.querySelector("#b-close-sidenav-1").addEventListener("click", function() {
+  document.getElementById("id-sidenav-1").classList.toggle("open");
+  /**reset the number of moviments*/
+  moviments = 0;
+  oTimer.startTimer();
+});
+
+/**
+ * Creates a new timer to track the
+ * game elapsed time.
+ * @class
+ */
+let oTimer = {
+	timeNow: 0,
+	timeGameStart: 0,
+	elapsedTotalTime: 0,
+	elapsedTimer: 0,
+	startTimer() {
+		this.timeGameStart = Date.now();
+		/**We used this.elapsedTimer to stop the timer! and call
+		the displayTime each second*/
+		this.elapsedTimer = setInterval(this.displayTimer, 1000);
+	},
+	/**Calculate and display the time*/
+	displayTimer() {
+		this.elapsedTotalTime = Date.now() - oTimer.timeGameStart;
+		let timeElapsedSec = Math.floor(this.elapsedTotalTime / 1000);
+		this.elapsedSec = timeElapsedSec - (Math.floor(timeElapsedSec / 60) * 60);
+		document.querySelectorAll(".span-timer-m").forEach(function(val) {
+			val.textContent = Math.floor(timeElapsedSec / 60);
+		});
+		document.querySelectorAll(".span-timer-s").forEach(function(val) {
+			val.textContent = timeElapsedSec - (Math.floor(timeElapsedSec / 60) * 60);
+		});
+	},
+};
+
+oTimer.startTimer();
+document.querySelector("#easy").style.background = "red";
+
+/**Difficult Level Easy*/
+document.querySelector("#easy").addEventListener("click", function() {
+	enemies(5);
+  /**reset the number of moviments*/
+  moviments = 0;
+  oTimer.startTimer();
+	player.reset();
+	/**Indicate the background*/
+	document.querySelector("#easy").style.background = "red";
+	document.querySelector("#moderate").style.background = "white";
+	document.querySelector("#hard").style.background = "white";
+	document.querySelector("#extreme").style.background = "white";
+});
+/**Difficult Level Moderate*/
+document.querySelector("#moderate").addEventListener("click", function() {
+	enemies(9);
+  /**reset the number of moviments*/
+  moviments = 0;
+  oTimer.startTimer();
+	player.reset();
+	document.querySelector("#easy").style.background = "white";
+	document.querySelector("#moderate").style.background = "red";
+	document.querySelector("#hard").style.background = "white";
+		document.querySelector("#extreme").style.background = "white";
+});
+/**Difficult Level Hard*/
+document.querySelector("#hard").addEventListener("click", function() {
+	enemies(15);
+  /**reset the number of moviments*/
+  moviments = 0;
+  oTimer.startTimer();
+	player.reset();
+	document.querySelector("#easy").style.background = "white";
+	document.querySelector("#moderate").style.background = "white";
+	document.querySelector("#hard").style.background = "red";
+		document.querySelector("#extreme").style.background = "white";
+});
+/**Difficult Level Hard*/
+document.querySelector("#extreme").addEventListener("click", function() {
+	enemies(20);
+  /**reset the number of moviments*/
+  moviments = 0;
+  oTimer.startTimer();
+	player.reset();
+	document.querySelector("#easy").style.background = "white";
+	document.querySelector("#moderate").style.background = "white";
+	document.querySelector("#hard").style.background = "white";
+		document.querySelector("#extreme").style.background = "red";
 });
