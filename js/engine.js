@@ -18,16 +18,20 @@ var Engine = (function(global) {
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas element's height/width and add it to the DOM.
      */
+
     var doc = global.document,
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
 
-    canvas.width = 505;
-    canvas.height = 606;
-    doc.body.appendChild(canvas);
-
+    /**Alocate some space on the webspace*/
+    canvas.width = 707;
+    canvas.height = 909;
+    doc.body.appendChild(canvas); /**Here goes to Resources.load below line 172*/
+    /**The canvas system 0,0 coordinate (x,y) are on the top left of the canvas
+    window. The number x goes bigger on the right direction and y grows bigger
+    on the y direction towards */
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
@@ -55,6 +59,11 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
+         /**The window.requestAnimationFrame() method tells the browser that
+         you wish to perform an animation and requests that the browser call a
+         specified function to update an animation before the next repain.
+         The method takes a callback as an argument to be invoked before the
+         repaint.*/
         win.requestAnimationFrame(main);
     }
 
@@ -63,7 +72,7 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
-        reset();
+        reset(); /**to be done!*/
         lastTime = Date.now();
         main();
     }
@@ -108,14 +117,17 @@ var Engine = (function(global) {
          */
         var rowImages = [
                 'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
+                'images/stone-block.png',   // Row 1 of 6 of stone
+                'images/stone-block-2.png',   // Row 2 of 6 of stone
+                'images/stone-block.png',   // Row 3 of 6 of stone
+                'images/stone-block-2.png',   // Row 4 of 6 of stone
+                'images/stone-block.png',   // Row 5 of 6 of stone
+                'images/stone-block-2.png',   // Row 6 of 6 of stone
                 'images/grass-block.png',   // Row 1 of 2 of grass
                 'images/grass-block.png'    // Row 2 of 2 of grass
             ],
-            numRows = 6,
-            numCols = 5,
+            numRows = 9,
+            numCols = 7,
             row, col;
 
         // Before drawing, clear existing canvas
@@ -134,6 +146,11 @@ var Engine = (function(global) {
                  * so that we get the benefits of caching these images, since
                  * we're using them over and over.
                  */
+                 /**First parameter: image, dx coordinate, dy coordinate*/
+                 /**dx: The x-axis coordinate in the destination canvas at which
+                 to place the top-left corner of the source image.*/
+                 /**dy: The y-axis coordinate in the destination canvas at which
+                 to place the top-left corner of the source image.*/
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
@@ -168,13 +185,17 @@ var Engine = (function(global) {
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
-    Resources.load([
+    Resources.load([ /**this load will call the file resources.load function load,
+      because resources is a global object of the window defined at resources.js.
+      It will create 6 Image Objects.*/
         'images/stone-block.png',
+        'images/stone-block-2.png',
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png'
     ]);
+    /**Call the Global Resources Method: onReady!*/
     Resources.onReady(init);
 
     /* Assign the canvas' context object to the global variable (the window
@@ -182,4 +203,4 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
-})(this);
+})(this); //**Refers to the window object*/

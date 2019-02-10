@@ -4,6 +4,9 @@
  * a simple "caching" layer so it will reuse cached images if you attempt
  * to load the same image multiple times.
  */
+ /**This is a Immediately-Invoked Function Expresson: called immediately after
+ it is defined. 1 - It is used to create a private scope!
+ 2- normally is intended to be invoked Once*/
 (function() {
     var resourceCache = {};
     var readyCallbacks = [];
@@ -45,7 +48,10 @@
              * within our cache; we'll need to load this image.
              */
             var img = new Image();
-            img.onload = function() {
+            img.onload = function() { /**This event handler will be called on the
+              image element when the image has finished loading. This applies
+              whether the image is applied via the src attribute or the list-style-image
+               style property.*/
                 /* Once our image has properly loaded, add it to our cache
                  * so that we can simply return this image if the developer
                  * attempts to load this file in the future.
@@ -55,7 +61,10 @@
                 /* Once the image is actually loaded and properly cached,
                  * call all of the onReady() callbacks we have defined.
                  */
-                if(isReady()) {
+                if(isReady()) { /**So, all the images are loaded then call the
+                  readyCallbacks array that stored the init function at the
+                  file: engine.js. It will reset, store lastime and call the
+                  main function*/
                     readyCallbacks.forEach(function(func) { func(); });
                 }
             };
@@ -83,6 +92,9 @@
     function isReady() {
         var ready = true;
         for(var k in resourceCache) {
+          /**hasOwnProperty is a JavaScript Standard method that returns a boolean
+          value indicating that the resourcesCache has this Property with the name of
+          argument (K)*/
             if(resourceCache.hasOwnProperty(k) &&
                !resourceCache[k]) {
                 ready = false;
@@ -91,8 +103,8 @@
         return ready;
     }
 
-    /* This function will add a function to the callback stack that is called
-     * when all requested images are properly loaded.
+    /* This function will add a function to the callback stack on the array (readyCallbacks)
+     * that is called when all requested images are properly loaded.
      */
     function onReady(func) {
         readyCallbacks.push(func);
