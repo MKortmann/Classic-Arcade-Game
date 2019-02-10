@@ -111,25 +111,26 @@ var Engine = (function(global) {
      * they are flipbooks creating the illusion of animation but in reality
      * they are just drawing the entire screen over and over.
      */
+     /**let's change the images: REAL ANIMATION*/
+     var counter = 0;
     function render() {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
-        var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 6 of stone
-                'images/stone-block-2.png',   // Row 2 of 6 of stone
-                'images/stone-block.png',   // Row 3 of 6 of stone
-                'images/stone-block-2.png',   // Row 4 of 6 of stone
-                'images/stone-block.png',   // Row 5 of 6 of stone
-                'images/stone-block-2.png',   // Row 6 of 6 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
-            ],
-            numRows = 9,
-            numCols = 7,
-            row, col;
-
+          var rowImages = [
+                  'images/water-block.png',   // Top row is water
+                  'images/stone-block.png',   // Row 1 of 6 of stone
+                  'images/stone-block-2.png',   // Row 2 of 6 of stone
+                  'images/stone-block.png',   // Row 3 of 6 of stone
+                  'images/stone-block-2.png',   // Row 4 of 6 of stone
+                  'images/stone-block.png',   // Row 5 of 6 of stone
+                  'images/stone-block-2.png',   // Row 6 of 6 of stone
+                  'images/grass-block.png',   // Row 1 of 2 of grass
+                  'images/grass-block.png'    // Row 2 of 2 of grass
+              ],
+              numRows = 9,
+              numCols = 7,
+              row, col;
         // Before drawing, clear existing canvas
         ctx.clearRect(0,0,canvas.width,canvas.height);
 
@@ -193,7 +194,11 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        "images/char-cat-girl.png",
+        "images/char-horn-girl.png",
+        "images/char-pink-girl.png",
+        "images/char-princess-girl.png" 
     ]);
     /**Call the Global Resources Method: onReady!*/
     Resources.onReady(init);

@@ -40,8 +40,8 @@ class Enemy {
 /**Player Class*/
 class Player {
 	/**It started at the middle bottom!*/
-	constructor(x = 303, y = 630) {
-		this.sprite = "images/char-boy.png";
+	constructor(x = 303, y = 630, figure = "char-boy.png") {
+		this.sprite = "images/" + figure;
 		this.x = x;
 		this.y = y;
 	}
@@ -156,6 +156,19 @@ document.querySelector("#b-close-sidenav-1").addEventListener("click", function(
   oTimer.startTimer();
 });
 
+/**Restart with diferent player*/
+/**Restart with char-cat-girl*/
+
+document.querySelector("#container-players").addEventListener("click", function(evt) {
+document.getElementById("id-sidenav-1").classList.toggle("open");
+  /**reset the number of moviments*/
+  moviments = 0;
+  oTimer.startTimer();
+	delete player;
+	const string = evt.target.id + ".png";
+	/**Creating the Player*/
+	player = new Player(303,630,string);
+});
 /**
  * Creates a new timer to track the
  * game elapsed time.
@@ -191,7 +204,7 @@ document.querySelector("#easy").style.background = "red";
 
 /**Difficult Level Easy*/
 document.querySelector("#easy").addEventListener("click", function() {
-	enemies(5);
+	enemies(1);
   /**reset the number of moviments*/
   moviments = 0;
   oTimer.startTimer();

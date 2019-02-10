@@ -7,6 +7,10 @@ body {
     -moz-transform-origin: 50% 0;
 }
 
+img {
+  cursor: pointer;
+}
+
 
 /** Part 1: sidenav Win */
 .sidenav {
