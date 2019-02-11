@@ -2,8 +2,8 @@ body {
     font-size: 1em;
     text-align: center;
     /**zoom out to fit all elements on the screen*/
-    zoom: 0.9;
-    -moz-transform: scale(0.7);
+    zoom: 0.85;
+    -moz-transform: scale(0.85);
     -moz-transform-origin: 50% 0;
 }
 
