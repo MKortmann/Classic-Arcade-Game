@@ -33,7 +33,20 @@ class Enemy {
 	render() {
 		/**Check if the enemy reach the player*/
 		checkCollisions();
+		/**nice to see is that after this.y, you could automatically rescale
+		the image writing the width and the height in pixels*/
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+		this.drawText();
+	}
+	drawText() {
+		ctx.font = "26pt Arial";
+		ctx.textAlign = "center";
+		ctx.fillStyle = "white";
+		let variable = oTimer.displayTimer() + "  Moviments: " + moviments;
+		ctx.fillText(variable, 355, 43);
+		ctx.strokeStyle = "black";
+		ctx.lineWidth = 1;
+		ctx.strokeText(variable, 355, 43);
 	}
 }
 
@@ -196,11 +209,14 @@ let oTimer = {
 		document.querySelectorAll(".span-timer-s").forEach(function(val) {
 			val.textContent = timeElapsedSec - (Math.floor(timeElapsedSec / 60) * 60);
 		});
+		let string_min = "Elapsed Time: " + Math.floor(timeElapsedSec / 60) + " min ";
+		let string_sec = timeElapsedSec - (Math.floor(timeElapsedSec / 60) * 60) + " sec";
+			return  string_min + string_sec;
 	},
 };
 
 oTimer.startTimer();
-document.querySelector("#easy").style.background = "red";
+document.querySelector("#easy").style.background = "#39F";
 
 /**Difficult Level Easy*/
 document.querySelector("#easy").addEventListener("click", function() {
@@ -210,7 +226,7 @@ document.querySelector("#easy").addEventListener("click", function() {
   oTimer.startTimer();
 	player.reset();
 	/**Indicate the background*/
-	document.querySelector("#easy").style.background = "red";
+	document.querySelector("#easy").style.background = "#39F";
 	document.querySelector("#moderate").style.background = "white";
 	document.querySelector("#hard").style.background = "white";
 	document.querySelector("#extreme").style.background = "white";
@@ -223,7 +239,7 @@ document.querySelector("#moderate").addEventListener("click", function() {
   oTimer.startTimer();
 	player.reset();
 	document.querySelector("#easy").style.background = "white";
-	document.querySelector("#moderate").style.background = "red";
+	document.querySelector("#moderate").style.background = "#39F";
 	document.querySelector("#hard").style.background = "white";
 		document.querySelector("#extreme").style.background = "white";
 });
@@ -236,7 +252,7 @@ document.querySelector("#hard").addEventListener("click", function() {
 	player.reset();
 	document.querySelector("#easy").style.background = "white";
 	document.querySelector("#moderate").style.background = "white";
-	document.querySelector("#hard").style.background = "red";
+	document.querySelector("#hard").style.background = "#39F";
 		document.querySelector("#extreme").style.background = "white";
 });
 /**Difficult Level Hard*/
@@ -249,5 +265,5 @@ document.querySelector("#extreme").addEventListener("click", function() {
 	document.querySelector("#easy").style.background = "white";
 	document.querySelector("#moderate").style.background = "white";
 	document.querySelector("#hard").style.background = "white";
-		document.querySelector("#extreme").style.background = "red";
+		document.querySelector("#extreme").style.background = "#39F";
 });

@@ -2,13 +2,24 @@ body {
     font-size: 1em;
     text-align: center;
     /**zoom out to fit all elements on the screen*/
-    zoom: 0.8;
+    zoom: 0.9;
     -moz-transform: scale(0.7);
     -moz-transform-origin: 50% 0;
 }
 
+h1 {
+  font-size: 3em;
+  padding-bottom: 0;
+  margin-bottom: 10px;
+}
+
 img {
   cursor: pointer;
+  opacity: 0.3;
+}
+
+img:hover {
+  opacity: 1.0;
 }
 
 
