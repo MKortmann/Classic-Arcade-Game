@@ -52,7 +52,8 @@ class Enemy {
 		this.sprite = "images/enemy-bug.png";
 		this.x = x;
 		this.y = y;
-		/**They start at diferent but fixed y positions*/
+		/**They start at diferent but fixed y positions. The fixed y positions helps
+    later when checking about collisions!*/
 		this.arrayStartY = new Array(42, 126, 210, 294, 378, 462);
 		/**Each enemy has a different speed*/
 		this.speedEnemy = speed;
@@ -87,11 +88,11 @@ class Enemy {
 		ctx.font = "26pt Arial";
 		ctx.textAlign = "center";
 		ctx.fillStyle = "white";
-		let variable = oTimer.displayTimerCanvas() + "  Moviments: " + oGame.moviments;
-		ctx.fillText(variable, 355, 43);
+		let variable = oTimer.displayTimerCanvas() + "  Score: " + oGame.moviments;
+		ctx.fillText(variable, 355, 870);
 		ctx.strokeStyle = "blue";
 		ctx.lineWidth = 1;
-		ctx.strokeText(variable, 355, 43);
+		ctx.strokeText(variable, 355, 870);
 	}
 }
 /**
@@ -130,6 +131,11 @@ class Player {
 		clearTimeout(oTimer.elapsedTimer);
 		oTimer.startTimer();
 		oGame.moviments = 0;
+    /**deleting the items*/
+    allItems.forEach(function(item) {
+        allItems.pop();
+    });
+    oGame.throwItems();
 	}
 	/**Check the keys! Keep the player in the canvas element!*/
 	handleInput(key) {
@@ -183,6 +189,7 @@ class Game {
 			allEnemies.pop();
 		}
 	}
+  /**Used to check collissions between player & enemies & items*/
 	checkCollisions() {
 		allEnemies.forEach(function(enemy) {
 			/*The player and the enemy should have in a difference
@@ -191,13 +198,66 @@ class Game {
 				player.reset();
 			}
 		});
+
+  allItems.forEach(function(item, num) {
+    if ( (Math.abs(player.x - item.x) <= 11) && (Math.abs(player.y - item.y) >= 60) && (Math.abs(player.y - item.y) <= 80) ) {
+      oGame.moviments = oGame.moviments + 50;
+      allItems.splice(num,1);
+    }
+  });
+
+
+	}
+
+  throwItems(numbers = 3) {
+    let sprite = new Array("images/GemBlue.png","images/GemGreen.png",
+      "images/GemOrange.png","images/Heart.png","images/Key.png",
+      "images/Rock.png");
+    let arrayStartY = new Array(116,200,284,368,452,536);
+    let arrayStartX = new Array(10,111,212,313,414,515,616);
+    /**Do not throw more items if there is already items on screen!*/
+    if (numbers > allItems.length) {
+
+      for(let i=0; i < numbers; i++) {
+        /**Calculate the random y position!*/
+        let randomNumberY = Math.floor(Math.random() * arrayStartY.length);
+        let y = arrayStartY[randomNumberY];
+        /**Calculate the random x position!*/
+        let randomNumberX = Math.floor(Math.random() * arrayStartX.length);
+        let x = arrayStartX[randomNumberX];
+        /*Random figure from array*/
+        let randomNumberF = Math.floor(Math.random() * sprite.length);
+        let oGem = new Gems(x,y,sprite[randomNumberF]);
+        allItems.push(oGem);
+      };
+    }
+  }
+}
+class Gems {
+	/**We have here start position (x,y) and standard speed factor*/
+	constructor(x = -120, y = 200, figure = "images/GemBlue.png") {
+		/**A sprite image is simply a single image files
+		which has multiple drawings within that single
+		image*/
+		this.sprite = figure;
+		this.x = x;
+		this.y = y;
+	}
+	/** Draw the enemy on the screen*/
+	render() {
+		/**nice to see is that after this.y, you could automatically rescale
+		the image writing the width and the height in pixels*/
+		ctx.drawImage(Resources.get(this.sprite), this.x, this.y,80,100);
 	}
 }
 
 /**Global*/
 let allEnemies = [];
+let allItems = [];
 
 oGame = new Game;
+/**throwItems*/
+oGame.throwItems(3);
 /**Five Enemies*/
 oGame.enemies(3);
 /**Creating the Player*/

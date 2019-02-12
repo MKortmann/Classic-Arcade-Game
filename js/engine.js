@@ -171,6 +171,10 @@ var Engine = (function(global) {
             enemy.render();
         });
 
+        allItems.forEach(function(item) {
+            item.render();
+        });
+
         player.render();
     }
 
@@ -198,7 +202,13 @@ var Engine = (function(global) {
         "images/char-cat-girl.png",
         "images/char-horn-girl.png",
         "images/char-pink-girl.png",
-        "images/char-princess-girl.png" 
+        "images/char-princess-girl.png",
+        "images/GemBlue.png",
+        "images/GemGreen.png",
+        "images/GemOrange.png",
+        "images/Heart.png",
+        "images/Key.png",
+        "images/Rock.png"        
     ]);
     /**Call the Global Resources Method: onReady!*/
     Resources.onReady(init);
