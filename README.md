@@ -16,6 +16,7 @@ In this game you have a Player and Enemies (bugs). The goal of the player is to 
 ## New Features
 
  - Different levels as easy, moderate, hard and extreme!!!
+ - Player selection: allow the user to choose between diferent players!
  - Increase game board!
  
 ## Documentations
