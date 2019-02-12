@@ -109,6 +109,9 @@ class Player {
 	}
   win() {
 		clearTimeout(oTimer.elapsedTimer);
+    /*Deactivate the keyboard: because the user have to click with
+    the mouse to avoid going out from the winMenu!*/
+    document.removeEventListener('keyup', gKeys, true);
     document.getElementById("id-sidenav-1").classList.toggle("open");
   }
 	/**If it reaches the water*/
@@ -136,6 +139,8 @@ class Player {
         allItems.pop();
     });
     oGame.throwItems();
+    /*reactivate the keyboard!*/
+    document.addEventListener('keyup', gKeys, true);
 	}
 	/**Check the keys! Keep the player in the canvas element!*/
 	handleInput(key) {
@@ -268,17 +273,23 @@ oTimer.startTimer();
 the state of the game*/
 document.querySelector("#easy").style.background = "#39F";
 
+
+
+
 /** This listens for key presses and sends the keys to your
  Player.handleInput() method. */
-document.addEventListener('keyup', function(e) {
-	var allowedKeys = {
-		37: 'left',
-		38: 'up',
-		39: 'right',
-		40: 'down'
-	};
-	player.handleInput(allowedKeys[e.keyCode]);
-});
+ function gKeys(evt) {
+   var allowedKeys = {
+     37: 'left',
+     38: 'up',
+     39: 'right',
+     40: 'down'
+   };
+   player.handleInput(allowedKeys[evt.keyCode]);
+ }
+
+document.addEventListener('keyup', gKeys, true);
+
 
 /**Close/Open the Win-Sidenav*/
 document.querySelector("#b-close-sidenav-1").addEventListener("click", function() {
