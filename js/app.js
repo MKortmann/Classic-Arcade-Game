@@ -110,6 +110,10 @@ class Player {
 	}
   win() {
 		clearTimeout(oTimer.elapsedTimer);
+    if (win.paused) {
+      win.play();
+    }
+
     /*Deactivate the keyboard: because the user have to click with
     the mouse to avoid going out from the winMenu!*/
     document.removeEventListener('keyup', gKeys, true);
@@ -130,6 +134,9 @@ class Player {
 	}
 	/**Reset the player position*/
 	reset() {
+    if(restartMusic.paused) {
+      restartMusic.play();
+    }
 		this.x = 303;
 		this.y = 990;
 		clearTimeout(oTimer.elapsedTimer);
@@ -151,24 +158,37 @@ class Player {
 				this.y >= 42 ? this.y = this.y - 84 : " ";
         oGame.moviments++;
         this.update();
-        if (audio.paused) {
-        	audio.play();
+
+        if (audioB.paused) {
+        	audioB.play();
+        }
+        if (audioWalk.paused) {
+          audioWalk.play();
         }
         break;
 			case "down":
 				this.y <= 1000 ? this.y = this.y + 84 : "";
         oGame.moviments++;
         this.update();
+        if (audioWalk.paused) {
+          audioWalk.play();
+        }
         break;
 			case "left":
 				this.x >= 50 ? this.x = this.x - 101 : "";
         oGame.moviments++;
         this.update();
+        if (audioWalk.paused) {
+          audioWalk.play();
+        }
         break;
 			case "right":
 				this.x <= 505 ? this.x = this.x + 101 : "";
         oGame.moviments++;
         this.update();
+        if (audioWalk.paused) {
+          audioWalk.play();
+        }
         break;
 		}
 	}
@@ -220,6 +240,9 @@ class Game {
 
   allItems.forEach(function(item, num) {
     if ( (Math.abs(player.x - item.x) == 10) && (Math.abs(player.y - item.y) == 40) ) {
+      if(itemMusic.paused) {
+        itemMusic.play();
+      }
       oGame.moviments = oGame.moviments + 50;
       allItems.splice(num,1);
       oGame.flag = true;
@@ -311,6 +334,13 @@ class Gems {
 /**Global*/
 let allEnemies = [];
 let allItems = [];
+
+/*Audios*/
+let audioB = document.querySelector(".music-background");
+let audioWalk = document.querySelector("#walk");
+let winGame = document.querySelector("#win");
+let itemMusic = document.querySelector("#item");
+let restartMusic = document.querySelector("#restart");
 
 oGame = new Game;
 /**throwItems*/

@@ -23,6 +23,9 @@ img:hover {
   opacity: 1.0;
 }
 
+.invisible {
+  display: none;
+}
 /** Part 1: sidenav Win */
 .sidenav {
 	height: 100%;
