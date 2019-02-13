@@ -151,6 +151,9 @@ class Player {
 				this.y >= 42 ? this.y = this.y - 84 : " ";
         oGame.moviments++;
         this.update();
+        if (audio.paused) {
+        	audio.play();
+        }
         break;
 			case "down":
 				this.y <= 1000 ? this.y = this.y + 84 : "";
@@ -208,10 +211,6 @@ class Game {
 		allEnemies.forEach(function(enemy) {
 			/*The player and the enemy should have in a difference
 			of at maximum of 73! And have the same y coordinates.*/
-      /*
-      console.log("player.x: " + player.x + "enemy.x: " + enemy.x);
-      console.log("player.y: " + player.y + "enemy.y: " + enemy.x);*/
-
 			if ((Math.abs(player.x - enemy.x) < 70) && (Math.abs(player.y - enemy.y) <= 25) ) {
 				player.reset();
 			}
@@ -399,6 +398,3 @@ document.querySelector("#container-buttons").addEventListener("click", function(
 
 /**Start Music Background*/
 const audio = document.querySelector(".music-background");
-if (audio.paused) {
-	audio.play();
-}
