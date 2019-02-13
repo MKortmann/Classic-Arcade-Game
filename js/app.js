@@ -212,13 +212,13 @@ class Game {
       console.log("player.x: " + player.x + "enemy.x: " + enemy.x);
       console.log("player.y: " + player.y + "enemy.y: " + enemy.x);*/
 
-			if ((Math.abs(player.x - enemy.x) < 73) && (Math.abs(player.y - enemy.y) <= 25) ) {
+			if ((Math.abs(player.x - enemy.x) < 70) && (Math.abs(player.y - enemy.y) <= 25) ) {
 				player.reset();
 			}
 		});
 
   allItems.forEach(function(item, num) {
-    if ( (Math.abs(player.x - item.x) <= 11) && (Math.abs(player.y - item.y) >= 40) && (Math.abs(player.y - item.y) <= 80) ) {
+    if ( (Math.abs(player.x - item.x) == 10) && (Math.abs(player.y - item.y) == 40) ) {
       oGame.moviments = oGame.moviments + 50;
       allItems.splice(num,1);
       oGame.flag = true;
