@@ -27,7 +27,7 @@ var Engine = (function(global) {
 
     /**Alocate some space on the webspace*/
     canvas.width = 707;
-    canvas.height = 909;
+    canvas.height = 1313;
     doc.body.appendChild(canvas); /**Here goes to Resources.load below line 172*/
     /**The canvas system 0,0 coordinate (x,y) are on the top left of the canvas
     window. The number x goes bigger on the right direction and y grows bigger
@@ -119,16 +119,20 @@ var Engine = (function(global) {
          */
           var rowImages = [
                   'images/water-block.png',   // Top row is water
-                  'images/stone-block.png',   // Row 1 of 6 of stone
-                  'images/stone-block-2.png',   // Row 2 of 6 of stone
-                  'images/stone-block.png',   // Row 3 of 6 of stone
-                  'images/stone-block-2.png',   // Row 4 of 6 of stone
-                  'images/stone-block.png',   // Row 5 of 6 of stone
-                  'images/stone-block-2.png',   // Row 6 of 6 of stone
+                  'images/stone-block.png',   // Row 1 of 10 of stone
+                  'images/stone-block-2.png',   // Row 2 of 10 of stone
+                  'images/stone-block.png',   // Row 3 of 10 of stone
+                  'images/stone-block-2.png',   // Row 4 of 10 of stone
+                  'images/stone-block.png',   // Row 5 of 10 of stone
+                  'images/stone-block-2.png',   // Row 6 of 10 of stone
+                  'images/stone-block.png',   // Row 7 of 10 of stone
+                  'images/stone-block-2.png',   // Row 8 of 10 of stone
+                  'images/stone-block.png',   // Row 9 of 10 of stone
+                  'images/stone-block-2.png',   // Row  of 8 of stone
                   'images/grass-block.png',   // Row 1 of 2 of grass
                   'images/grass-block.png'    // Row 2 of 2 of grass
               ],
-              numRows = 9,
+              numRows = 13,
               numCols = 7,
               row, col;
         // Before drawing, clear existing canvas
@@ -208,7 +212,7 @@ var Engine = (function(global) {
         "images/GemOrange.png",
         "images/Heart.png",
         "images/Key.png",
-        "images/Rock.png"        
+        "images/Rock.png"
     ]);
     /**Call the Global Resources Method: onReady!*/
     Resources.onReady(init);

@@ -54,7 +54,8 @@ class Enemy {
 		this.y = y;
 		/**They start at diferent but fixed y positions. The fixed y positions helps
     later when checking about collisions!*/
-		this.arrayStartY = new Array(42, 126, 210, 294, 378, 462);
+		this.arrayStartY = new Array(42, 126, 210, 294, 378, 462,546,630,714,798);
+
 		/**Each enemy has a different speed*/
 		this.speedEnemy = speed;
 	}
@@ -89,10 +90,10 @@ class Enemy {
 		ctx.textAlign = "center";
 		ctx.fillStyle = "white";
 		let variable = oTimer.displayTimerCanvas() + "  Score: " + oGame.moviments;
-		ctx.fillText(variable, 355, 870);
+		ctx.fillText(variable, 355, 1200);
 		ctx.strokeStyle = "blue";
 		ctx.lineWidth = 1;
-		ctx.strokeText(variable, 355, 870);
+		ctx.strokeText(variable, 355, 1200);
 	}
 }
 /**
@@ -102,7 +103,7 @@ class Enemy {
  */
 class Player {
 	/**It started at the middle bottom!*/
-	constructor(x = 303, y = 630, figure = "char-boy.png") {
+	constructor(x = 303, y = 990, figure = "char-boy.png") {
 		this.sprite = "images/" + figure;
 		this.x = x;
 		this.y = y;
@@ -130,7 +131,7 @@ class Player {
 	/**Reset the player position*/
 	reset() {
 		this.x = 303;
-		this.y = 630;
+		this.y = 990;
 		clearTimeout(oTimer.elapsedTimer);
 		oTimer.startTimer();
 		oGame.moviments = 0;
@@ -152,7 +153,7 @@ class Player {
         this.update();
         break;
 			case "down":
-				this.y <= 610 ? this.y = this.y + 84 : "";
+				this.y <= 1000 ? this.y = this.y + 84 : "";
         oGame.moviments++;
         this.update();
         break;
@@ -177,6 +178,14 @@ class Game {
 
 	constructor() {
 		this.moviments = 0;
+    this.flag = false;
+    this.timer = 0;
+    /**These are the start coordinates to determine where it starts the text
+    animations!!!*/
+    this.startY = 70;
+    this.startYSecond = 900;
+    this.startXAmazing = 355;
+    this.startXAmazing2 = 355;
 	}
 
 	enemies(number = 5) {
@@ -199,26 +208,63 @@ class Game {
 		allEnemies.forEach(function(enemy) {
 			/*The player and the enemy should have in a difference
 			of at maximum of 73! And have the same y coordinates.*/
-			if ((Math.abs(player.x - enemy.x) < 73) && player.y === enemy.y) {
+      /*
+      console.log("player.x: " + player.x + "enemy.x: " + enemy.x);
+      console.log("player.y: " + player.y + "enemy.y: " + enemy.x);*/
+
+			if ((Math.abs(player.x - enemy.x) < 73) && (Math.abs(player.y - enemy.y) <= 25) ) {
 				player.reset();
 			}
 		});
 
   allItems.forEach(function(item, num) {
-    if ( (Math.abs(player.x - item.x) <= 11) && (Math.abs(player.y - item.y) >= 60) && (Math.abs(player.y - item.y) <= 80) ) {
+    if ( (Math.abs(player.x - item.x) <= 11) && (Math.abs(player.y - item.y) >= 40) && (Math.abs(player.y - item.y) <= 80) ) {
       oGame.moviments = oGame.moviments + 50;
       allItems.splice(num,1);
+      oGame.flag = true;
+      oGame.timer = oTimer.timeElapsedSec;
+      oGame.startY = 70;
+      oGame.startYSecond = 900;
+      oGame.startXAmazing = 355;
+      oGame.startXAmazing2 = 355;
     }
   });
 
+  if(this.flag) {
+    this.drawTextPoint();
+    /**The draw stays 1 second on the screen!*/
+    if(this.timer + 1 < oTimer.timeElapsedSec) {
+      this.flag = false;
+    }
+  }
 
 	}
 
-  throwItems(numbers = 3) {
+  drawTextPoint() {
+    ctx.font = "58pt Impact";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "white";
+    let variable1 = "!!!Congratulations!!!";
+    let variable2 = "!!!Amazing!!!";
+    let variable3 = "!!!More 50 Points!!!";
+
+
+    ctx.fillText(variable1, 355, this.startY++);
+    ctx.fillText(variable2, this.startXAmazing++, 470);
+    ctx.fillText(variable3, 355, this.startYSecond--);
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 3;
+    ctx.strokeText(variable1, 355, this.startY);
+    ctx.strokeText(variable2, this.startXAmazing2--, 470);
+    ctx.strokeText(variable3, 355, this.startYSecond);
+  }
+
+  throwItems(numbers = 5) {
     let sprite = new Array("images/GemBlue.png","images/GemGreen.png",
       "images/GemOrange.png","images/Heart.png","images/Key.png",
       "images/Rock.png");
-    let arrayStartY = new Array(116,200,284,368,452,536);
+
+    let arrayStartY = new Array(106,190,274,358,442,526,610,694,778,862);
     let arrayStartX = new Array(10,111,212,313,414,515,616);
     /**Do not throw more items if there is already items on screen!*/
     if (numbers > allItems.length) {
@@ -262,7 +308,7 @@ let allItems = [];
 
 oGame = new Game;
 /**throwItems*/
-oGame.throwItems(3);
+oGame.throwItems(6);
 /**Five Enemies*/
 oGame.enemies(3);
 /**Creating the Player*/
@@ -306,7 +352,7 @@ document.querySelector("#container-players").addEventListener("click", function(
 		delete player;
 		const string = evt.target.id + ".png";
 		/**Creating the Player*/
-		player = new Player(303,630,string);
+		player = new Player(303,990,string);
 });
 /**Buttons to restart the game with different levels:*/
 /**Difficult Level Easy*/
