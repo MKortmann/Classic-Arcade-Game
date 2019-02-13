@@ -81,7 +81,7 @@ class Enemy {
 		oGame.checkCollisions();
 		/**nice to see is that after this.y, you could automatically rescale
 		the image writing the width and the height in pixels*/
-		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+		ctx.drawImage(Resources.get(this.sprite), this.x, this.y,120,160);
 		this.drawText();
 	}
 	/*I would like to use canvas to show some nice features!*/
@@ -189,6 +189,8 @@ class Game {
     this.startYSecond = 900;
     this.startXAmazing = 355;
     this.startXAmazing2 = 355;
+    this.arrayXPrincess = new Array(0,101,202,303,404,505,606);
+    this.randomNumberX = 0;
 	}
 
 	enemies(number = 5) {
@@ -226,6 +228,7 @@ class Game {
       oGame.startYSecond = 900;
       oGame.startXAmazing = 355;
       oGame.startXAmazing2 = 355;
+      oGame.randomNumberX = Math.floor(Math.random() * oGame.arrayXPrincess.length);
     }
   });
 
@@ -256,6 +259,10 @@ class Game {
     ctx.strokeText(variable1, 355, this.startY);
     ctx.strokeText(variable2, this.startXAmazing2--, 470);
     ctx.strokeText(variable3, 355, this.startYSecond);
+
+    /**Show the princess in the castel*/
+    /**Creating the Princess Player*/
+    ctx.drawImage(Resources.get(playerPrincess.sprite), this.arrayXPrincess[oGame.randomNumberX], playerPrincess.y);
   }
 
   throwItems(numbers = 5) {
@@ -312,6 +319,8 @@ oGame.throwItems(6);
 oGame.enemies(3);
 /**Creating the Player*/
 player = new Player();
+/**Creating the Princess Player*/
+playerPrincess = new Player(x = 100, y = -5, figure = "char-pink-girl.png");
 /**Start Timer*/
 oTimer.startTimer();
 /**Start at easy level, let the button highlighted to indicate
