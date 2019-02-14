@@ -248,9 +248,9 @@ class Game {
 
   allItems.forEach(function(item, num) {
     if ( (Math.abs(player.x - item.x) == 10) && (Math.abs(player.y - item.y) == 40) ) {
-      if(itemMusic.paused) {
+
         itemMusic.play();
-      }
+
       oGame.moviments = oGame.moviments + 50;
       allItems.splice(num,1);
       oGame.flag = true;
