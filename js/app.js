@@ -372,6 +372,20 @@ document.querySelector("#easy").style.background = "#39F";
    player.handleInput(allowedKeys[evt.keyCode]);
  }
 
+ /**Joystick*/
+ document.querySelector("#grid-container").addEventListener("click", clickKeys, true);
+
+function clickKeys(evt) {
+  console.log(evt.target.textContent);
+  let allowedClicks = {
+    "arrow_back": 'left',
+    "arrow_upward": 'up',
+    "arrow_forward": 'right',
+    "arrow_downward": 'down'
+  };
+  player.handleInput(allowedClicks[evt.target.textContent]);
+}
+
 document.addEventListener('keyup', gKeys, true);
 
 

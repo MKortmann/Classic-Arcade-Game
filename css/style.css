@@ -2,10 +2,10 @@ body {
     font-size: 1em;
     text-align: center;
     /**zoom out to fit all elements on the screen*/
-    zoom: 0.67;
-    -moz-transform: scale(0.67);
+    zoom: 0.65;
+    -moz-transform: scale(0.65);
     -moz-transform-origin: 50% 0;
-    overflow-y: hidden;
+
 }
 
 h1 {
@@ -64,4 +64,38 @@ img:hover {
 
 .button-sidenav:hover {
 	color: red;
+}
+
+/**Joystic*/
+.grid-container {
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 0;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%,-50%);
+
+	display: grid;
+	grid-template-columns: auto auto auto;
+	background: white;
+	grid-gap: 12px;
+	/**top, right, bottom, left*/
+	/*padding: 25px 10px 25px 10px;*/
+  padding: 0px;
+	border-radius: 12px;
+	max-width: 600px;
+	justify-content: space-evenly;
+	margin: auto;
+	/** big grid stay at the center*/
+	border: 0;
+}
+
+.material-icons:hover {
+  cursor: pointer;
+  background-color: blue;
+}
+
+.material-icons.icon-size {
+  font-size: 48px;
+
 }

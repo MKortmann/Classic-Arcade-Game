@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Effective JavaScript: Frogger</title>
-    <link rel="stylesheet" href="css/style.css">
+  <!--According to Microsoft, when using the X-UA-Compatible tag, it should be
+  as high as possible in your document head.-->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Effective JavaScript: Frogger</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!--Google icons used in the Main Card Grid and for some buttons styles-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
     <h1>Classic Arcade Game</h1>
@@ -61,6 +67,19 @@
       <audio class="invisible" id="restart">
         <source src="./sounds/restart.mp3" type="audio/mp3">
       </audio>
+    </div>
+
+    <!--Main Card Grid-->
+    <div id="grid-container" class="grid-container">
+      <div id="div-0"><span class="hide icon-size" id="span-0"></span></div>
+      <div id="div-1"><span class="material-icons icon-size" id="span-1">arrow_upward</span></div>
+      <div id="div-2"><span class="hide icon-size" id="span-2"></span></div>
+      <div id="div-3"><span class="material-icons icon-size" id="span-3">arrow_back</span></div>
+      <div id="div-4"><span class="hide icon-size" id="span-4"></span></div>
+      <div id="div-5"><span class="material-icons icon-size" id="span-5">arrow_forward</span></div>
+      <div id="div-6"><span class="hide icon-size" id="span-6"></span></div>
+      <div id="div-7"><span class="material-icons icon-size" id="span-7">arrow_downward</span></div>
+      <div id="div-8"><span class="hide icon-size" id="span-8"></span></div>
     </div>
 
     <script src="js/resources.js"></script>
