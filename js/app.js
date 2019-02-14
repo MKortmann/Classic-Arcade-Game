@@ -175,7 +175,7 @@ class Player {
         }
         break;
 			case "down":
-				this.y <= 1000 ? this.y = this.y + 84 : "";
+				this.y <= 950 ? this.y = this.y + 84 : "";
         oGame.moviments++;
         this.update();
         if (audioWalk.paused) {
