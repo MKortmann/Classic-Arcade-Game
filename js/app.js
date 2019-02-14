@@ -109,6 +109,13 @@ class Player {
 		this.x = x;
 		this.y = y;
 	}
+  /**I could not delete player and create it again, so I create
+  this method*/
+  restart(x = 303, y = 990, figure = "char-boy.png") {
+		this.sprite = "images/" + figure;
+		this.x = x;
+		this.y = y;
+  }
   win() {
 		clearTimeout(oTimer.elapsedTimer);
     if (win.paused) {
@@ -406,7 +413,7 @@ document.querySelector("#container-players").addEventListener("click", function(
 
 		const string = evt.target.id + ".png";
 		/**Creating the Player*/
-    player.constructor(303,990,string);
+    player.restart(303,990,string);
 		/*player = new Player(303,990,string);*/
 });
 /**Buttons to restart the game with different levels:*/
