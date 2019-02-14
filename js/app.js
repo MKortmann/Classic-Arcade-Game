@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Creates a new timer to track the
  * game elapsed time.
@@ -21,10 +22,10 @@ let oTimer = {
 		this.timeElapsedSec = Math.floor(this.elapsedTotalTime / 1000);
 		this.elapsedSec = this.timeElapsedSec - (Math.floor(this.timeElapsedSec / 60) * 60);
 		document.querySelectorAll(".span-timer-m").forEach(function(val) {
-			val.textContent = Math.floor(this.timeElapsedSec / 60);
+			val.textContent = Math.floor(oTimer.timeElapsedSec / 60);
 		});
 		document.querySelectorAll(".span-timer-s").forEach(function(val) {
-			val.textContent = this.timeElapsedSec - (Math.floor(this.timeElapsedSec / 60) * 60);
+			val.textContent = oTimer.timeElapsedSec - (Math.floor(oTimer.timeElapsedSec / 60) * 60);
 		});
 	},
 	/**Calculate and display the time for the canvas!*/
@@ -332,7 +333,7 @@ class Gems {
 }
 
 /**Global*/
-let allEnemies = [];
+var allEnemies = [];
 let allItems = [];
 
 /*Audios*/
@@ -342,15 +343,15 @@ let winGame = document.querySelector("#win");
 let itemMusic = document.querySelector("#item");
 let restartMusic = document.querySelector("#restart");
 
-oGame = new Game;
+let oGame = new Game;
 /**throwItems*/
 oGame.throwItems(6);
 /**Five Enemies*/
 oGame.enemies(3);
 /**Creating the Player*/
-player = new Player();
+let player = new Player();
 /**Creating the Princess Player*/
-playerPrincess = new Player(x = 100, y = -5, figure = "char-pink-girl.png");
+let playerPrincess = new Player(100,-5,"char-pink-girl.png");
 /**Start Timer*/
 oTimer.startTimer();
 /**Start at easy level, let the button highlighted to indicate
@@ -401,10 +402,12 @@ document.querySelector("#container-players").addEventListener("click", function(
 	document.getElementById("id-sidenav-1").classList.toggle("open");
 	  /**reset the number of moviments*/
 		player.reset();
-		delete player;
+		/*delete player;*/
+
 		const string = evt.target.id + ".png";
 		/**Creating the Player*/
-		player = new Player(303,990,string);
+    player.constructor(303,990,string);
+		/*player = new Player(303,990,string);*/
 });
 /**Buttons to restart the game with different levels:*/
 /**Difficult Level Easy*/
