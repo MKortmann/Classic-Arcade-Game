@@ -1,7 +1,26 @@
 "use strict";
 /**
+ * The code is composed and written in the order below:
+ * PART 1: SETUP CREATE CLASSES:
+ * oTimer: literal object used to display the time
+ * Enemy: class enemy responsible to create enemies objects.
+ * Player: class implement the player object.
+ * Game: class responsible to create the amount of numbers of enemies,
+ * enemy speed, checkCollisions, throw items/gems, draw animations.
+ * Gems: class items create different items objects.
+ * PART 2: INITIALIZATION/CREATE OBJECTS:
+ * We have global variables resonsible for musics, create objects (enemies, players),
+ * start timer, set background status, function track keys
+ * PART 3: GAME EXTRA INTERACTION (BUTTONS, ZOOM IN...)
+ * In the end you have a simple implementation for the HTML elements as
+ * buttons: easier, easy, medium, joystick...
+ * @summary Classic Arcade Game concise functionality description.
+ */
+/** PART 1: SETUP CREATE CLASSES:*/
+/**
  * Creates a new timer to track the
  * game elapsed time.
+ * I could also use the time already in engine.js
  * @class
  */
 let oTimer = {
@@ -36,7 +55,7 @@ let oTimer = {
 		/*to be easy to read putting the results in two strings:*/
 		let string_min = "Elapsed Time: " + Math.floor(this.timeElapsedSec / 60) + " min ";
 		let string_sec = this.timeElapsedSec - (Math.floor(this.timeElapsedSec / 60) * 60) + " sec";
-		return  string_min + string_sec;
+		return string_min + string_sec;
 	},
 };
 /**
@@ -55,7 +74,7 @@ class Enemy {
 		this.y = y;
 		/**They start at diferent but fixed y positions. The fixed y positions helps
     later when checking about collisions!*/
-		this.arrayStartY = new Array(42, 126, 210, 294, 378, 462,546,630,714,798);
+		this.arrayStartY = new Array(42, 126, 210, 294, 378, 462, 546, 630, 714, 798);
 
 		/**Each enemy has a different speed*/
 		this.speedEnemy = speed;
@@ -82,10 +101,10 @@ class Enemy {
 		oGame.checkCollisions();
 		/**nice to see is that after this.y, you could automatically rescale
 		the image writing the width and the height in pixels*/
-		ctx.drawImage(Resources.get(this.sprite), this.x, this.y,120,160);
+		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 		this.drawText();
 	}
-	/*I would like to use canvas to show some nice features!*/
+	/**Using the canvas to show some nice features!*/
 	drawText() {
 		ctx.font = "26pt Arial";
 		ctx.textAlign = "center";
@@ -109,32 +128,30 @@ class Player {
 		this.x = x;
 		this.y = y;
 	}
-  /**I could not delete player and create it again, so I create
-  this method*/
-  restart(x = 303, y = 990, figure = "char-boy.png") {
+	/**The same as constructor however you do not need to delete it.*/
+	restart(x = 303, y = 990, figure = "char-boy.png") {
 		this.sprite = "images/" + figure;
 		this.x = x;
 		this.y = y;
-  }
-  win() {
+	}
+	win() {
 		clearTimeout(oTimer.elapsedTimer);
-    if (win.paused) {
-      win.play();
-    }
-
-    /*Deactivate the keyboard: because the user have to click with
-    the mouse to avoid going out from the winMenu!*/
-    document.removeEventListener('keyup', gKeys, true);
-    document.getElementById("id-sidenav-1").classList.toggle("open");
-  }
+		if (win.paused) {
+			win.play();
+		}
+		/*Deactivate the keyboard: because the user have to click with
+		the mouse to avoid going out from the winMenu!*/
+		document.removeEventListener('keyup', gKeys, true);
+		document.getElementById("id-sidenav-1").classList.toggle("open");
+	}
 	/**If it reaches the water*/
 	update() {
-    if(this.y <= 35) {
-      this.win();
-    }
-   document.querySelectorAll(".span-moviments").forEach(function(val) {
-     val.textContent = oGame.moviments;
-   });
+		if (this.y <= 35) {
+			this.win();
+		}
+		document.querySelectorAll(".span-moviments").forEach(function(val) {
+			val.textContent = oGame.moviments;
+		});
 	}
 	render() {
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -142,21 +159,22 @@ class Player {
 	}
 	/**Reset the player position*/
 	reset() {
-    if(restartMusic.paused) {
-      restartMusic.play();
-    }
+		if (restartMusic.paused) {
+			restartMusic.play();
+		}
 		this.x = 303;
 		this.y = 990;
 		clearTimeout(oTimer.elapsedTimer);
 		oTimer.startTimer();
 		oGame.moviments = 0;
-    /**deleting the items*/
-    allItems.forEach(function(item) {
-        allItems.pop();
-    });
-    oGame.throwItems();
-    /*reactivate the keyboard!*/
-    document.addEventListener('keyup', gKeys, true);
+		/**deleting the items*/
+		allItems.forEach(function(item) {
+			allItems.pop();
+		});
+		/**throwing items on canvas again*/
+		oGame.throwItems();
+		/*reactivate the keyboard!*/
+		document.addEventListener('keyup', gKeys, true);
 	}
 	/**Check the keys! Keep the player in the canvas element!*/
 	handleInput(key) {
@@ -164,61 +182,65 @@ class Player {
 			case "up":
 				/*Recall that the player cannot move off screen*/
 				this.y >= 42 ? this.y = this.y - 84 : " ";
-        oGame.moviments++;
-        this.update();
+				oGame.moviments++;
+				this.update();
 
-        if (audioB.paused) {
-        	audioB.play();
-        }
-        if (audioWalk.paused) {
-          audioWalk.play();
-        }
-        break;
+				if (audioB.paused) {
+					audioB.play();
+				}
+				if (audioWalk.paused) {
+					audioWalk.play();
+				}
+				break;
 			case "down":
 				this.y <= 950 ? this.y = this.y + 84 : "";
-        oGame.moviments++;
-        this.update();
-        if (audioWalk.paused) {
-          audioWalk.play();
-        }
-        break;
+				oGame.moviments++;
+				this.update();
+				if (audioWalk.paused) {
+					audioWalk.play();
+				}
+				break;
 			case "left":
 				this.x >= 50 ? this.x = this.x - 101 : "";
-        oGame.moviments++;
-        this.update();
-        if (audioWalk.paused) {
-          audioWalk.play();
-        }
-        break;
+				oGame.moviments++;
+				this.update();
+				if (audioWalk.paused) {
+					audioWalk.play();
+				}
+				break;
 			case "right":
 				this.x <= 505 ? this.x = this.x + 101 : "";
-        oGame.moviments++;
-        this.update();
-        if (audioWalk.paused) {
-          audioWalk.play();
-        }
-        break;
+				oGame.moviments++;
+				this.update();
+				if (audioWalk.paused) {
+					audioWalk.play();
+				}
+				break;
 		}
 	}
 }
 
 /**
-Create the amount number of enemies with different start location,
-different speed and at it directly to the allEnemies array.*/
+ * Creates a player class.
+ * You can restart it with different players.
+ * @class
+ *
+ *Create the amount number of enemies with different start location,
+ *different speed and add it to the allEnemies array.*/
 class Game {
 
 	constructor() {
 		this.moviments = 0;
-    this.flag = false;
-    this.timer = 0;
-    /**These are the start coordinates to determine where it starts the text
-    animations!!!*/
-    this.startY = 70;
-    this.startYSecond = 900;
-    this.startXAmazing = 355;
-    this.startXAmazing2 = 355;
-    this.arrayXPrincess = new Array(0,101,202,303,404,505,606);
-    this.randomNumberX = 0;
+		this.flag = false;
+		this.timer = 0;
+		/**These are the start coordinates to determine where it starts the text
+		animations!!!*/
+		this.startY = 70;
+		this.startYSecond = 900;
+		this.startXAmazing = 355;
+		this.startXAmazing2 = 355;
+		this.arrayXPrincess = new Array(0, 101, 202, 303, 404, 505, 606);
+		this.randomNumberX = 0;
 	}
 
 	enemies(number = 5) {
@@ -232,95 +254,98 @@ class Game {
 			allEnemies.push(enemy);
 		}
 		/**Deleting the exceed enemies*/
-		while(allEnemies.length > number) {
+		while (allEnemies.length > number) {
 			allEnemies.pop();
 		}
 	}
-  /**Used to check collissions between player & enemies & items*/
+	/**Used to check collissions between player & enemies & items*/
 	checkCollisions() {
 		allEnemies.forEach(function(enemy) {
 			/*The player and the enemy should have in a difference
 			of at maximum of 73! And have the same y coordinates.*/
-			if ((Math.abs(player.x - enemy.x) < 70) && (Math.abs(player.y - enemy.y) <= 25) ) {
+			if ((Math.abs(player.x - enemy.x) < 70) && (Math.abs(player.y - enemy.y) <= 25)) {
 				player.reset();
 			}
 		});
 
-  allItems.forEach(function(item, num) {
-    if ( (Math.abs(player.x - item.x) == 10) && (Math.abs(player.y - item.y) == 40) ) {
+		allItems.forEach(function(item, num) {
+			if ((Math.abs(player.x - item.x) == 10) && (Math.abs(player.y - item.y) == 40)) {
+				itemMusic.play();
+				oGame.moviments = oGame.moviments + 50;
+				allItems.splice(num, 1);
+				oGame.flag = true;
+				oGame.timer = oTimer.timeElapsedSec;
+				oGame.startY = 70;
+				oGame.startYSecond = 900;
+				oGame.startXAmazing = 355;
+				oGame.startXAmazing2 = 355;
+				oGame.randomNumberX = Math.floor(Math.random() * oGame.arrayXPrincess.length);
+			}
+		});
 
-        itemMusic.play();
-
-      oGame.moviments = oGame.moviments + 50;
-      allItems.splice(num,1);
-      oGame.flag = true;
-      oGame.timer = oTimer.timeElapsedSec;
-      oGame.startY = 70;
-      oGame.startYSecond = 900;
-      oGame.startXAmazing = 355;
-      oGame.startXAmazing2 = 355;
-      oGame.randomNumberX = Math.floor(Math.random() * oGame.arrayXPrincess.length);
-    }
-  });
-
-  if(this.flag) {
-    this.drawTextPoint();
-    /**The draw stays 1 second on the screen!*/
-    if(this.timer + 1 < oTimer.timeElapsedSec) {
-      this.flag = false;
-    }
-  }
+		if (this.flag) {
+			this.drawTextPoint();
+			/**The draw stays 1 second on the screen!*/
+			if (this.timer + 1 < oTimer.timeElapsedSec) {
+				this.flag = false;
+			}
+		}
 
 	}
 
-  drawTextPoint() {
-    ctx.font = "58pt Impact";
-    ctx.textAlign = "center";
-    ctx.fillStyle = "white";
-    let variable1 = "!!!Congratulations!!!";
-    let variable2 = "!!!Amazing!!!";
-    let variable3 = "!!!More 50 Points!!!";
+	drawTextPoint() {
+		ctx.font = "58pt Impact";
+		ctx.textAlign = "center";
+		ctx.fillStyle = "white";
+		let variable1 = "!!!Congratulations!!!";
+		let variable2 = "!!!Amazing!!!";
+		let variable3 = "!!!More 50 Points!!!";
 
+		ctx.fillText(variable1, 355, this.startY++);
+		ctx.fillText(variable2, this.startXAmazing++, 470);
+		ctx.fillText(variable3, 355, this.startYSecond--);
+		ctx.strokeStyle = "red";
+		ctx.lineWidth = 3;
+		ctx.strokeText(variable1, 355, this.startY);
+		ctx.strokeText(variable2, this.startXAmazing2--, 470);
+		ctx.strokeText(variable3, 355, this.startYSecond);
 
-    ctx.fillText(variable1, 355, this.startY++);
-    ctx.fillText(variable2, this.startXAmazing++, 470);
-    ctx.fillText(variable3, 355, this.startYSecond--);
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 3;
-    ctx.strokeText(variable1, 355, this.startY);
-    ctx.strokeText(variable2, this.startXAmazing2--, 470);
-    ctx.strokeText(variable3, 355, this.startYSecond);
+		/**Show the princess in the castel*/
+		/**Creating the Princess Player*/
+		ctx.drawImage(Resources.get(playerPrincess.sprite), this.arrayXPrincess[oGame.randomNumberX], playerPrincess.y);
+	}
 
-    /**Show the princess in the castel*/
-    /**Creating the Princess Player*/
-    ctx.drawImage(Resources.get(playerPrincess.sprite), this.arrayXPrincess[oGame.randomNumberX], playerPrincess.y);
-  }
+	throwItems(numbers = 5) {
+		let sprite = new Array("images/GemBlue.png", "images/GemGreen.png",
+			"images/GemOrange.png", "images/Heart.png", "images/Key.png",
+			"images/Rock.png");
 
-  throwItems(numbers = 5) {
-    let sprite = new Array("images/GemBlue.png","images/GemGreen.png",
-      "images/GemOrange.png","images/Heart.png","images/Key.png",
-      "images/Rock.png");
+		let arrayStartY = new Array(106, 190, 274, 358, 442, 526, 610, 694, 778, 862);
+		let arrayStartX = new Array(10, 111, 212, 313, 414, 515, 616);
+		/**Do not throw more items if there is already items on screen!*/
+		if (numbers > allItems.length) {
 
-    let arrayStartY = new Array(106,190,274,358,442,526,610,694,778,862);
-    let arrayStartX = new Array(10,111,212,313,414,515,616);
-    /**Do not throw more items if there is already items on screen!*/
-    if (numbers > allItems.length) {
-
-      for(let i=0; i < numbers; i++) {
-        /**Calculate the random y position!*/
-        let randomNumberY = Math.floor(Math.random() * arrayStartY.length);
-        let y = arrayStartY[randomNumberY];
-        /**Calculate the random x position!*/
-        let randomNumberX = Math.floor(Math.random() * arrayStartX.length);
-        let x = arrayStartX[randomNumberX];
-        /*Random figure from array*/
-        let randomNumberF = Math.floor(Math.random() * sprite.length);
-        let oGem = new Gems(x,y,sprite[randomNumberF]);
-        allItems.push(oGem);
-      };
-    }
-  }
+			for (let i = 0; i < numbers; i++) {
+				/**Calculate the random y position!*/
+				let randomNumberY = Math.floor(Math.random() * arrayStartY.length);
+				let y = arrayStartY[randomNumberY];
+				/**Calculate the random x position!*/
+				let randomNumberX = Math.floor(Math.random() * arrayStartX.length);
+				let x = arrayStartX[randomNumberX];
+				/*Random figure from array*/
+				let randomNumberF = Math.floor(Math.random() * sprite.length);
+				let oGem = new Gems(x, y, sprite[randomNumberF]);
+				allItems.push(oGem);
+			};
+		}
+	}
 }
+/**
+ * Creates a Gem class.
+ * You can create different object items
+ * @class
+ *
+ **/
 class Gems {
 	/**We have here start position (x,y) and standard speed factor*/
 	constructor(x = -120, y = 200, figure = "images/GemBlue.png") {
@@ -335,11 +360,12 @@ class Gems {
 	render() {
 		/**nice to see is that after this.y, you could automatically rescale
 		the image writing the width and the height in pixels*/
-		ctx.drawImage(Resources.get(this.sprite), this.x, this.y,80,100);
+		ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 80, 100);
 	}
 }
 
-/**Global*/
+/* PART 2: INITIALIZATION/CREATE OBJECTS:*/
+/**Global variables:*/
 var allEnemies = [];
 let allItems = [];
 
@@ -350,114 +376,125 @@ let winGame = document.querySelector("#win");
 let itemMusic = document.querySelector("#item");
 let restartMusic = document.querySelector("#restart");
 
+/**Global objects:*/
 let oGame = new Game;
 /**throwItems*/
 oGame.throwItems(6);
-/**Five Enemies*/
+/**Start at easier level with 3 enemies*/
 oGame.enemies(3);
 /**Creating the Player*/
 let player = new Player();
 /**Creating the Princess Player*/
-let playerPrincess = new Player(100,-5,"char-pink-girl.png");
+let playerPrincess = new Player(100, -5, "char-pink-girl.png");
 /**Start Timer*/
 oTimer.startTimer();
 /**Start at easy level, let the button highlighted to indicate
 the state of the game*/
-document.querySelector("#easy").style.background = "#39F";
+document.querySelector("#easier").style.background = "#39F";
 
+/**Music Background*/
+const audio = document.querySelector(".music-background");
 
-
-
-/** This listens for key presses and sends the keys to your
+/* PART 3: GAME EXTRA INTERACTION (BUTTONS, ZOOM IN...)*/
+/**Joystick for smartphone, tablet...*/
+document.querySelector("#grid-container").addEventListener("click", clickKeys, true);
+/** FOR JOYSTICK: This listens for key presses and sends the keys to your
  Player.handleInput() method. */
- function gKeys(evt) {
-   var allowedKeys = {
-     37: 'left',
-     38: 'up',
-     39: 'right',
-     40: 'down'
-   };
-   player.handleInput(allowedKeys[evt.keyCode]);
- }
-
- /**Joystick*/
- document.querySelector("#grid-container").addEventListener("click", clickKeys, true);
-
 function clickKeys(evt) {
-  console.log(evt.target.textContent);
-  let allowedClicks = {
-    "arrow_back": 'left',
-    "arrow_upward": 'up',
-    "arrow_forward": 'right',
-    "arrow_downward": 'down'
-  };
-  player.handleInput(allowedClicks[evt.target.textContent]);
+	let allowedClicks = {
+		"arrow_back": 'left',
+		"arrow_upward": 'up',
+		"arrow_forward": 'right',
+		"arrow_downward": 'down'
+	};
+	player.handleInput(allowedClicks[evt.target.textContent]);
+}
+
+/** FOR KEYBOARD: This listens for key presses and sends the keys to your
+ Player.handleInput() method. */
+function gKeys(evt) {
+	var allowedKeys = {
+		37: 'left',
+		38: 'up',
+		39: 'right',
+		40: 'down'
+	};
+	player.handleInput(allowedKeys[evt.keyCode]);
 }
 
 document.addEventListener('keyup', gKeys, true);
 
-
 /**Close/Open the Win-Sidenav*/
 document.querySelector("#b-close-sidenav-1").addEventListener("click", function() {
-  document.getElementById("id-sidenav-1").classList.toggle("open");
-  /**reset the number of moviments*/
+	document.getElementById("id-sidenav-1").classList.toggle("open");
+	/**reset the number of moviments*/
 	player.reset();
 });
 
 /**Restart with diferent player*/
 document.querySelector("#container-players").addEventListener("click", function(evt) {
 	document.getElementById("id-sidenav-1").classList.toggle("open");
-	  /**reset the number of moviments*/
-		player.reset();
-		/*delete player;*/
-
-		const string = evt.target.id + ".png";
-		/**Creating the Player*/
-    player.restart(303,990,string);
-		/*player = new Player(303,990,string);*/
+	/**reset the number of moviments*/
+	player.reset();
+	const string = evt.target.id + ".png";
+	/**restart the Player*/
+	player.restart(303, 990, string);
 });
+/**Joystick On-Off*/
+document.querySelector(".joystick").addEventListener("click", function() {
+	document.querySelector("#grid-container").classList.toggle("display");
+}, false);
 /**Buttons to restart the game with different levels:*/
-/**Difficult Level Easy*/
+
 document.querySelector("#container-buttons").addEventListener("click", function(evt) {
-		/**Checking*/
-		switch ( evt.target.id ) {
-			case "easy":
+	/**Checking*/
+	switch (evt.target.id) {
+		case "easier":
 			oGame.enemies(3);
 			player.reset();
-			/**Indicate the background*/
-			document.querySelector("#easy").style.background = "#39F";
-			document.querySelector("#moderate").style.background = "white";
+			/**Indicate the background button colors*/
+			document.querySelector("#easier").style.background = "#39F";
+			document.querySelector("#easy").style.background = "white";
+			document.querySelector("#normal").style.background = "white";
 			document.querySelector("#hard").style.background = "white";
-			document.querySelector("#extreme").style.background = "white";
+			document.querySelector("#harder").style.background = "white";
 			break;
-			case "moderate":
+		case "easy":
+			oGame.enemies(5);
+			player.reset();
+			/**Indicate the background*/
+			document.querySelector("#easier").style.background = "white";
+			document.querySelector("#easy").style.background = "#39F";
+			document.querySelector("#normal").style.background = "white";
+			document.querySelector("#hard").style.background = "white";
+			document.querySelector("#harder").style.background = "white";
+			break;
+		case "normal":
 			oGame.enemies(9);
 			player.reset();
+			document.querySelector("#easier").style.background = "white";
 			document.querySelector("#easy").style.background = "white";
-			document.querySelector("#moderate").style.background = "#39F";
+			document.querySelector("#normal").style.background = "#39F";
 			document.querySelector("#hard").style.background = "white";
-			document.querySelector("#extreme").style.background = "white";
+			document.querySelector("#harder").style.background = "white";
 			break;
-			case "hard":
-			oGame.enemies(15);
+		case "hard":
+			oGame.enemies(12);
 			player.reset();
+			document.querySelector("#easier").style.background = "white";
 			document.querySelector("#easy").style.background = "white";
-			document.querySelector("#moderate").style.background = "white";
+			document.querySelector("#normal").style.background = "white";
 			document.querySelector("#hard").style.background = "#39F";
-			document.querySelector("#extreme").style.background = "white";
+			document.querySelector("#harder").style.background = "white";
 			break;
-			case "extreme":
-			oGame.enemies(20);
+		case "harder":
+			oGame.enemies(17);
 			player.reset();
+			document.querySelector("#easier").style.background = "white";
 			document.querySelector("#easy").style.background = "white";
-			document.querySelector("#moderate").style.background = "white";
+			document.querySelector("#normal").style.background = "white";
 			document.querySelector("#hard").style.background = "white";
-			document.querySelector("#extreme").style.background = "#39F";
+			document.querySelector("#harder").style.background = "#39F";
 			break;
-			default:
-			console.log("error: " + evt.target.id);
-		}
+	}
 });
-
-/**Start Music Background*/
-const audio = document.querySelector(".music-background");

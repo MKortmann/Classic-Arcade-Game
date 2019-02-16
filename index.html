@@ -1,90 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <!--According to Microsoft, when using the X-UA-Compatible tag, it should be
+	<!--According to Microsoft, when using the X-UA-Compatible tag, it should be
   as high as possible in your document head.-->
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Effective JavaScript: Frogger</title>
-  <link rel="stylesheet" href="css/style.css">
-  <!--Google icons used in the Main Card Grid and for some buttons styles-->
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Effective JavaScript: Frogger</title>
+	<link rel="stylesheet" href="css/style.css">
+	<!--Google icons used in the Main Card Grid and for some buttons styles-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
-<body>
-    <h1>Classic Arcade Game</h1>
 
-    <!--SIDENAV 1: WIN GAME MENU (Congratulations Popup)-->
-  	<div id="id-sidenav-1" class="sidenav">
-  		<p class="big-font-sidenav">CONGRATULATIONS<p>
-  			  <!--Time of Pressed Keyboard Keys (moviments)-->
-  				<p>
-  					<span class="big-font-sidenav">S</span>core: <span class="span-moviments big-font-sidenav">0</span>
-  				</p>
-  				<!--Display Elapsed Time-->
-  				<div>
-  					<span class="big-font-sidenav">E</span>lapsed <span class="big-font-sidenav">T</span>ime:
-  					<span class="span-timer-m big-font-sidenav">0</span> m <span class="span-timer-s big-font-sidenav">0</span> s
-  				</div>
-          <p> Select the new player to restart:  </p>
-          <span id="container-players">
+<body id="body">
+	<h1>Classic Arcade Game</h1>
 
-            <img id="char-boy" src="images/char-boy.png" atl="char-boy.png">
-            <img id="char-cat-girl" src="images/char-cat-girl.png" atl="char-cat-girl.png">
-            <img id="char-horn-girl" src="images/char-horn-girl.png" atl="char-horn-girl.png">
-            <img id="char-pink-girl" src="images/char-pink-girl.png" atl="char-pink-girl.png">
-            <img id="char-princess-girl" src="images/char-princess-girl.png" atl="char-princess-girl.png">
-          </span>
-  				<!--Buttons-->
-  				<div>
-  					<p>
-  						<button class="button-sidenav" id="b-close-sidenav-1">close</button>
-  					</p>
-  				</div>
-  	</div>
-  	<!--END OF SIDENAV 1-->
-    <div>
-      <span id="container-buttons">
-        <button class="button-sidenav" id="easy">Easy</button>
-        <button class="button-sidenav" id="moderate">Moderate</button>
-        <button class="button-sidenav" id="hard">Hard</button>
-        <button class="button-sidenav" id="extreme">Extreme</button>
-      </span>
-    </div>
-    <div>
-      <audio class="music-background">
-        <source src="./sounds/mario.mp3" type="audio/mp3">
-      </audio>
-      <audio class="invisible" id="win">
-        <source src="./sounds/wingame.mp3" type="audio/mp3">
-      </audio>
-      <audio class="invisible" id="walk">
-        <source src="./sounds/walkshort.mp3" type="audio/mp3">
-      </audio>
-      <audio class="invisible" id="item">
-        <source src="./sounds/Item.mp3" type="audio/mp3">
-      </audio>
-      <audio class="invisible" id="restart">
-        <source src="./sounds/restart.mp3" type="audio/mp3">
-      </audio>
-    </div>
+	<!--SIDENAV 1: WIN GAME MENU (Congratulations Popup)-->
+	<div id="id-sidenav-1" class="sidenav">
+		<p class="big-font-sidenav">CONGRATULATIONS<p>
+				<!--Time of Pressed Keyboard Keys (moviments)-->
+				<p>
+					<span class="big-font-sidenav">S</span>core: <span class="span-moviments big-font-sidenav">0</span>
+				</p>
+				<!--Display Elapsed Time-->
+				<div>
+					<span class="big-font-sidenav">E</span>lapsed <span class="big-font-sidenav">T</span>ime:
+					<span class="span-timer-m big-font-sidenav">0</span> m <span class="span-timer-s big-font-sidenav">0</span> s
+				</div>
+				<p> Select the new player to restart: </p>
+				<span id="container-players">
 
-    <!--Main Card Grid-->
-    <div id="grid-container" class="grid-container">
-      <div id="div-0"><span id="span-0"></span></div>
-      <div id="div-1"><span class="material-icons icon-size" id="span-1">arrow_upward</span></div>
-      <div id="div-2"><span id="span-2"></span></div>
-      <div id="div-3"><span class="material-icons icon-size" id="span-3">arrow_back</span></div>
-      <div id="div-4"><span id="span-4"></span></div>
-      <div id="div-5"><span class="material-icons icon-size" id="span-5">arrow_forward</span></div>
-      <div id="div-6"><span id="span-6"></span></div>
-      <div id="div-7"><span class="material-icons icon-size" id="span-7">arrow_downward</span></div>
-      <div id="div-8"><span id="span-8"></span></div>
-    </div>
+					<img id="char-boy" src="images/char-boy.png" alt="char-boy.png">
+					<img id="char-cat-girl" src="images/char-cat-girl.png" alt="char-cat-girl.png">
+					<img id="char-horn-girl" src="images/char-horn-girl.png" alt="char-horn-girl.png">
+					<img id="char-pink-girl" src="images/char-pink-girl.png" alt="char-pink-girl.png">
+					<img id="char-princess-girl" src="images/char-princess-girl.png" alt="char-princess-girl.png">
+				</span>
+				<!--Buttons-->
+				<div>
+					<p>
+						<button class="button-sidenav" id="b-close-sidenav-1">close</button>
+					</p>
+				</div>
+	</div>
+	<!--END OF SIDENAV 1-->
+	<!--<button class="button-sidenav" id="joystick">Joystick</button> -->
+	<img class="joystick" src="images/joystick.svg" alt="joystick.svg">
+	<div>
+		<span id="container-buttons">
+			<button class="button-sidenav" id="easier">Easier</button>
+			<button class="button-sidenav" id="easy">Easy</button>
+			<button class="button-sidenav" id="normal">Normal</button>
+			<button class="button-sidenav" id="hard">Hard</button>
+			<button class="button-sidenav" id="harder">Harder</button>
+		</span>
+	</div>
+	<div>
+		<audio class="music-background">
+			<source src="./sounds/mario.mp3" type="audio/mp3">
+		</audio>
+		<audio class="invisible" id="win">
+			<source src="./sounds/wingame.mp3" type="audio/mp3">
+		</audio>
+		<audio class="invisible" id="walk">
+			<source src="./sounds/walkshort.mp3" type="audio/mp3">
+		</audio>
+		<audio class="invisible" id="item">
+			<source src="./sounds/item.mp3" type="audio/mp3">
+		</audio>
+		<audio class="invisible" id="restart">
+			<source src="./sounds/restart.mp3" type="audio/mp3">
+		</audio>
+	</div>
 
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
+	<!--Main Card Grid-->
+	<div id="grid-container" class="grid-container">
+		<div id="div-0"><span id="span-0"></span></div>
+		<div id="div-1"><span class="material-icons icon-size" id="span-1">arrow_upward</span></div>
+		<div id="div-2"><span id="span-2"></span></div>
+		<div id="div-3"><span class="material-icons icon-size" id="span-3">arrow_back</span></div>
+		<div id="div-4"><span id="span-4"></span></div>
+		<div id="div-5"><span class="material-icons icon-size" id="span-5">arrow_forward</span></div>
+		<div id="div-6"><span id="span-6"></span></div>
+		<div id="div-7"><span class="material-icons icon-size" id="span-7">arrow_downward</span></div>
+		<div id="div-8"><span id="span-8"></span></div>
+	</div>
+
+	<script src="js/resources.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/engine.js"></script>
 
 </body>
+
 </html>
