@@ -41,9 +41,9 @@ img:hover {
 .sidenav.open {
 	top: 0;
 	padding-top: 0;
-	max-width: 50%;
-	left: 25%;
-	right: 25%;
+	max-width: 65%;
+	left: 15%;
+	right: 15%;
 	margin: auto;
 	background: linear-gradient(to bottom right, gray 30%, white 100%);
 	color: white;
@@ -160,8 +160,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.43;
-		-moz-transform: scale(0.43);
+		zoom: 0.50;
+		-moz-transform: scale(0.50);
 		-moz-transform-origin: 50% 0;
 	}
 }
@@ -171,8 +171,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.42;
-		-moz-transform: scale(0.42);
+		zoom: 0.49;
+		-moz-transform: scale(0.49);
 		-moz-transform-origin: 50% 0;
 	}
 
@@ -181,13 +181,28 @@ big tablet you will need to activate the joystic!*/
 	}
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 360px) {
 	body {
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.40;
-		-moz-transform: scale(0.40);
+		zoom: 0.45;
+		-moz-transform: scale(0.45);
+		-moz-transform-origin: 50% 0;
+	}
+
+	.grid-container {
+		bottom: +10px;
+	}
+}
+
+@media screen and (max-width: 330px) {
+	body {
+		font-size: 1em;
+		text-align: center;
+		/**zoom out to fit all elements on the screen*/
+		zoom: 0.42;
+		-moz-transform: scale(0.42);
 		-moz-transform-origin: 50% 0;
 	}
 
