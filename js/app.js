@@ -69,7 +69,13 @@ class Enemy {
 		/**A sprite image is simply a single image files
 		which has multiple drawings within that single
 		image*/
-		this.sprite = "images/enemy-bug.png";
+		if (counter % 2 == 0) {
+			this.sprite = new Array("images/enemy-bug-2.png", "images/enemy-bug-21.png");
+		} else {
+			this.sprite = new Array("images/enemy-bug.png", "images/enemy-bug-11.png");
+		}
+		counter++;
+
 		this.x = x;
 		this.y = y;
 		/**They start at diferent but fixed y positions. The fixed y positions helps
@@ -101,7 +107,12 @@ class Enemy {
 		oGame.checkCollisions();
 		/**nice to see is that after this.y, you could automatically rescale
 		the image writing the width and the height in pixels*/
-		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+		if (oTimer.elapsedTotalTime % 3 == 0) {
+			ctx.drawImage(Resources.get(this.sprite[0]), this.x, this.y);
+		} else {
+			ctx.drawImage(Resources.get(this.sprite[1]), this.x, this.y);
+		}
+
 		this.drawText();
 	}
 	/**Using the canvas to show some nice features!*/
@@ -315,10 +326,9 @@ class Game {
 		ctx.drawImage(Resources.get(playerPrincess.sprite), this.arrayXPrincess[oGame.randomNumberX], playerPrincess.y);
 	}
 
-	throwItems(numbers = 5) {
-		let sprite = new Array("images/GemBlue.png", "images/GemGreen.png",
-			"images/GemOrange.png", "images/Heart.png", "images/Key.png",
-			"images/Rock.png");
+	throwItems(numbers = 7) {
+		let sprite = new Array("images/GemBlue.png", "images/Heart.png", "images/Key.png",
+			"images/Rock.png", "images/Star.png", "images/Selector.png", "images/GemGreen.png", "images/GemOrange.png");
 
 		let arrayStartY = new Array(106, 190, 274, 358, 442, 526, 610, 694, 778, 862);
 		let arrayStartX = new Array(10, 111, 212, 313, 414, 515, 616);
@@ -366,8 +376,13 @@ class Gems {
 
 /* PART 2: INITIALIZATION/CREATE OBJECTS:*/
 /**Global variables:*/
+
 var allEnemies = [];
 let allItems = [];
+
+/**counter: for enemies! It is used in the Enemy constructor to distribute the
+enemy-bug and enemy-bug2 equally in the canvas! They have different design.*/
+let counter = 0;
 
 /*Audios*/
 let audioB = document.querySelector(".music-background");
@@ -381,7 +396,7 @@ let oGame = new Game;
 /**throwItems*/
 oGame.throwItems(6);
 /**Start at easier level with 3 enemies*/
-oGame.enemies(3);
+oGame.enemies(4);
 /**Creating the Player*/
 let player = new Player();
 /**Creating the Princess Player*/
@@ -450,7 +465,7 @@ document.querySelector("#container-buttons").addEventListener("click", function(
 	/**Checking*/
 	switch (evt.target.id) {
 		case "easier":
-			oGame.enemies(3);
+			oGame.enemies(4);
 			player.reset();
 			/**Indicate the background button colors*/
 			document.querySelector("#easier").style.background = "#39F";
@@ -460,7 +475,7 @@ document.querySelector("#container-buttons").addEventListener("click", function(
 			document.querySelector("#harder").style.background = "white";
 			break;
 		case "easy":
-			oGame.enemies(5);
+			oGame.enemies(6);
 			player.reset();
 			/**Indicate the background*/
 			document.querySelector("#easier").style.background = "white";

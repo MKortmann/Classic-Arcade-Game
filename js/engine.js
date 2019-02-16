@@ -180,6 +180,7 @@ var Engine = (function(global) {
 		"images/water-block.png",
 		"images/grass-block.png",
 		"images/enemy-bug.png",
+		"images/enemy-bug-11.png",
 		"images/char-boy.png",
 		"images/char-cat-girl.png",
 		"images/char-horn-girl.png",
@@ -190,7 +191,11 @@ var Engine = (function(global) {
 		"images/GemOrange.png",
 		"images/Heart.png",
 		"images/Key.png",
-		"images/Rock.png"
+		"images/Rock.png",
+		"images/Star.png",
+		"images/Selector.png",
+		"images/enemy-bug-2.png",
+		"images/enemy-bug-21.png"
 	]);
 	/**Call the Global Resources Method: onReady!*/
 	Resources.onReady(init);
