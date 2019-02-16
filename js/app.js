@@ -397,7 +397,7 @@ let counter = 0;
 let audioB = document.querySelector(".music-background");
 let audioWalk = document.querySelector("#walk");
 let winGame = document.querySelector("#win");
-let itemMusic = document.querySelector("#item");
+let itemMusic = document.querySelector("#gem");
 let restartMusic = document.querySelector("#restart");
 
 /**Global objects:*/
