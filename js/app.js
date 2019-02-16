@@ -333,12 +333,6 @@ class Game {
 		/**Show the princess in the castel*/
 		/**Creating the Princess Player*/
 		ctx.drawImage(Resources.get(playerPrincess.sprite), this.arrayXPrincess[oGame.randomNumberX], playerPrincess.y);
-    /**Writing two times for smartphone! See if it works!*/
-    if (itemMusic.paused) {
-      itemMusic.play();
-    } else {
-      itemMusic.pause();
-    }
   }
 
 	throwItems(numbers = 7) {
