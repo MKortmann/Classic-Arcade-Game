@@ -15,8 +15,7 @@ In this game you have a Player and Enemies (bugs). The goal of the player is to 
 
 ## New Features
 
- - Smartphone and Table compatible (Responsive Design)!
- - Include Joystick allowing to play the game not only with keyboard but with fingers or mouse!
+ - Smartphone and Table compatible (Responsive Design) through joystick! You can also play with your mouse!
  - Different difficult levels as easy, normal, hard!
  - Player selection: allow the user to choose between diferent players!
  - Different enemies!
