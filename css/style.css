@@ -3,8 +3,8 @@ body {
 	font-size: 1em;
 	text-align: center;
 	/**zoom out to fit all elements on the screen*/
-	zoom: 0.74;
-	-moz-transform: scale(0.74);
+	zoom: 0.63;
+	-moz-transform: scale(0.63);
 	-moz-transform-origin: 50% 0;
 }
 
@@ -73,6 +73,7 @@ img:hover {
 	position: absolute;
 	bottom: 0;
 	padding-bottom: 0;
+	height:30%;
 	left: 50%;
 	opacity: 1.0;
 	transform: translate(-50%, -50%);
@@ -118,8 +119,8 @@ big tablet you will need to activate the joystic!*/
 @media screen and (max-width: 1025px) {
 	body {
 		/**zoom out to fit all elements on the screen*/
-		zoom: 1.0;
-		-moz-transform: scale(1.0);
+		zoom: 0.9;
+		-moz-transform: scale(0.9);
 		-moz-transform-origin: 50% 0;
 	}
 
@@ -133,8 +134,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.60;
-		-moz-transform: scale(0.60);
+		zoom: 0.58;
+		-moz-transform: scale(0.58);
 		-moz-transform-origin: 50% 0;
 	}
 }
@@ -144,8 +145,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.56;
-		-moz-transform: scale(0.56);
+		zoom: 0.54;
+		-moz-transform: scale(0.54);
 		-moz-transform-origin: 50% 0;
 	}
 
@@ -159,8 +160,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.46;
-		-moz-transform: scale(0.46);
+		zoom: 0.44;
+		-moz-transform: scale(0.44);
 		-moz-transform-origin: 50% 0;
 	}
 }
@@ -170,8 +171,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.49;
-		-moz-transform: scale(0.49);
+		zoom: 0.48;
+		-moz-transform: scale(0.48);
 		-moz-transform-origin: 50% 0;
 	}
 
@@ -185,8 +186,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.42;
-		-moz-transform: scale(0.42);
+		zoom: 0.40;
+		-moz-transform: scale(0.40);
 		-moz-transform-origin: 50% 0;
 	}
 
