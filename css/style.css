@@ -119,7 +119,7 @@ big tablet you will need to activate the joystic!*/
 @media screen and (max-width: 1025px) {
 	body {
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.63;
+		zoom: 0.61;
 		-moz-transform: scale(0.63);
 		-moz-transform-origin: 50% 0;
 	}
@@ -134,8 +134,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.58;
-		-moz-transform: scale(0.58);
+		zoom: 0.56;
+		-moz-transform: scale(0.56);
 		-moz-transform-origin: 50% 0;
 	}
 }
@@ -145,8 +145,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.54;
-		-moz-transform: scale(0.54);
+		zoom: 0.53;
+		-moz-transform: scale(0.53);
 		-moz-transform-origin: 50% 0;
 	}
 
@@ -160,8 +160,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.44;
-		-moz-transform: scale(0.44);
+		zoom: 0.43;
+		-moz-transform: scale(0.43);
 		-moz-transform-origin: 50% 0;
 	}
 }
@@ -171,8 +171,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.48;
-		-moz-transform: scale(0.48);
+		zoom: 0.42;
+		-moz-transform: scale(0.42);
 		-moz-transform-origin: 50% 0;
 	}
 
