@@ -173,9 +173,10 @@ class Player {
 	/**Reset the player position*/
 	reset() {
     this.loop = true;
+    /*
 		if (restartMusic.paused) {
 			restartMusic.play();
-		}
+		}*/
 		this.x = 303;
 		this.y = 990;
 		clearTimeout(oTimer.elapsedTimer);
@@ -398,7 +399,7 @@ let audioB = document.querySelector(".music-background");
 let audioWalk = document.querySelector("#walk");
 let winGame = document.querySelector("#win");
 let itemMusic = document.querySelector("#item");
-let restartMusic = document.querySelector("#restart");
+/*let restartMusic = document.querySelector("#restart");*/
 
 /**Global objects:*/
 let oGame = new Game;
