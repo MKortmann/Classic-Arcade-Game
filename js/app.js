@@ -138,6 +138,8 @@ class Player {
 		this.sprite = "images/" + figure;
 		this.x = x;
 		this.y = y;
+    /**very important variable to avoid to open the side-win many times!*/
+    this.loop = true;
 	}
 	/**The same as constructor however you do not need to delete it.*/
 	restart(x = 303, y = 990, figure = "char-boy.png") {
@@ -147,9 +149,9 @@ class Player {
 	}
 	win() {
 		clearTimeout(oTimer.elapsedTimer);
-		if (win.paused) {
+      /*it should play it only one time!*/
+      this.loop = false;
 			win.play();
-		}
 		/*Deactivate the keyboard: because the user have to click with
 		the mouse to avoid going out from the winMenu!*/
 		document.removeEventListener('keyup', gKeys, true);
@@ -157,8 +159,8 @@ class Player {
 	}
 	/**If it reaches the water*/
 	update() {
-		if (this.y <= 35) {
-			this.win();
+		if (this.y <= 35 && this.loop) {
+      this.win();
 		}
 		document.querySelectorAll(".span-moviments").forEach(function(val) {
 			val.textContent = oGame.moviments;
@@ -170,6 +172,7 @@ class Player {
 	}
 	/**Reset the player position*/
 	reset() {
+    this.loop = true;
 		if (restartMusic.paused) {
 			restartMusic.play();
 		}
@@ -281,7 +284,13 @@ class Game {
 
 		allItems.forEach(function(item, num) {
 			if ((Math.abs(player.x - item.x) == 10) && (Math.abs(player.y - item.y) == 40)) {
-				itemMusic.play();
+        /**Problems with iphone or smartphone. Sometimes it play and sometimes not.
+        I am trying to see if this code below helps */
+        if (itemMusic.paused) {
+          itemMusic.play();
+        } else {
+          itemMusic.pause();
+        }
 				oGame.moviments = oGame.moviments + 50;
 				allItems.splice(num, 1);
 				oGame.flag = true;
