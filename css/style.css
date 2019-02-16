@@ -73,7 +73,7 @@ img:hover {
 	position: absolute;
 	bottom: 0;
 	padding-bottom: 0;
-	height:30%;
+	height: 30%;
 	left: 50%;
 	opacity: 1.0;
 	transform: translate(-50%, -50%);
@@ -150,8 +150,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.52;
-		-moz-transform: scale(0.52);
+		zoom: 0.50;
+		-moz-transform: scale(0.50);
 		-moz-transform-origin: 50% 0;
 	}
 
@@ -165,8 +165,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.49;
-		-moz-transform: scale(0.50);
+		zoom: 0.47;
+		-moz-transform: scale(0.47);
 		-moz-transform-origin: 50% 0;
 	}
 }
@@ -176,8 +176,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.48;
-		-moz-transform: scale(0.48);
+		zoom: 0.45;
+		-moz-transform: scale(0.45);
 		-moz-transform-origin: 50% 0;
 	}
 
@@ -191,8 +191,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.44;
-		-moz-transform: scale(0.44);
+		zoom: 0.42;
+		-moz-transform: scale(0.42);
 		-moz-transform-origin: 50% 0;
 	}
 
@@ -206,8 +206,8 @@ big tablet you will need to activate the joystic!*/
 		font-size: 1em;
 		text-align: center;
 		/**zoom out to fit all elements on the screen*/
-		zoom: 0.41;
-		-moz-transform: scale(0.41);
+		zoom: 0.39;
+		-moz-transform: scale(0.39);
 		-moz-transform-origin: 50% 0;
 	}
 
